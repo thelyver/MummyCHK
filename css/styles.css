@@ -391,21 +391,23 @@ textarea {
   margin: var(--spacing-lg) 0;
   padding: var(--spacing-lg);
   border-radius: var(--border-radius);
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.6;
   animation: slideIn 0.3s ease-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .warning-message {
   background: #FFF3E0;
-  border-left: 4px solid var(--warning);
-  color: var(--text-primary);
+  border-left: 6px solid var(--warning);
+  color: #212121;
 }
 
 .success-message {
   background: #E8F5E9;
-  border-left: 4px solid var(--success);
-  color: var(--text-primary);
+  border-left: 6px solid var(--success);
+  color: #212121;
 }
 
 @keyframes slideIn {
