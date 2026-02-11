@@ -430,13 +430,15 @@ footer {
 }
 
 footer p {
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-size: 16px;
+  color: var(--text-primary);
   margin-bottom: var(--spacing-xs);
+  font-weight: 500;
 }
 
 .footer-note {
-  font-size: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
 }
 
 /* ============================================

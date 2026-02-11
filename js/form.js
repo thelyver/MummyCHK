@@ -124,7 +124,7 @@ function setupEventListeners() {
   legSymptomRadios.forEach(radio => {
     radio.addEventListener('change', function() {
       if (this.value === '힘 빠짐') {
-        showWarning('⚠️ <strong>중요:</strong> 다리에 힘이 빠지는 증상은 신경 압박의 신호일 수 있습니다. 즉시 병원 상담을 권장합니다.');
+        showWarning('⚠️ <strong>중요:</strong> 다리에 힘이 빠지는 증상은 신경 압박의 신호일 수 있습니다. 즉시 병원 상담을 권장합니다.', false);
       }
     });
   });
@@ -258,10 +258,10 @@ function checkWarnings(formData) {
     warnings.push('⚠️ <strong>주의:</strong> 통증 점수가 8점 이상입니다. 증상이 지속되면 병원 상담을 고려하세요.');
   }
 
-  // 경고 메시지 표시
+  // 경고 메시지 표시 (스크롤 활성화)
   if (warnings.length > 0) {
     setTimeout(() => {
-      showWarning(warnings.join('<br><br>'));
+      showWarning(warnings.join('<br><br>'), true);
     }, 500);
   }
 }
@@ -293,6 +293,11 @@ function resetForm() {
     updateCharCount(textarea);
   });
 
-  // 화면 최상단으로 스크롤
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // 성공 메시지 위치로 스크롤 (부드럽게)
+  const successMessage = document.getElementById('successMessage');
+  if (successMessage && successMessage.style.display !== 'none') {
+    setTimeout(() => {
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  }
 }

@@ -104,23 +104,31 @@ function showSuccess(message) {
       successDiv.style.display = 'none';
     }, 5000);
 
-    // 화면 최상단으로 스크롤
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 성공 메시지 위치로 스크롤 (부드럽게, 중앙에 표시)
+    setTimeout(() => {
+      successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
   }
 }
 
 /**
  * 경고 메시지 표시 (다리 힘 빠짐 등)
  * @param {string} message - 경고 메시지
+ * @param {boolean} scroll - 스크롤 여부 (기본값: true)
  */
-function showWarning(message) {
+function showWarning(message, scroll = true) {
   const warningDiv = document.getElementById('warningMessage');
   if (warningDiv) {
     warningDiv.innerHTML = message;
     warningDiv.style.display = 'block';
 
-    // 화면 최상단으로 스크롤
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // scroll이 true일 때만 스크롤
+    if (scroll) {
+      // 경고 메시지 위치로 스크롤 (부드럽게, 중앙에 표시)
+      setTimeout(() => {
+        warningDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
   }
 }
 
