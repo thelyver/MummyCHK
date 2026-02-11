@@ -6,7 +6,7 @@
 // Google Apps Script 배포 URL
 // ⚠️ 중요: 이 URL을 본인의 Apps Script 배포 URL로 변경하세요!
 // ============================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzkUBf3IeR2klfqziWn7HxWssBpxsl-hNeb1NkDXLY3JaOSxoqB4gfRSYV-X2wZzBAtYA/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDXKGU4dJGBFT5HN52CYIdkJQxoQ3X6T_rAa2-jLOhd6ZzPIgt8wb6y5V0bF-FC4K6mQ/exec';
 
 // ============================================
 // 페이지 로드 시 초기화
