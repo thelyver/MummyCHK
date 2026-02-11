@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="L4-5 디스크 환자를 위한 일일 건강 기록 앱">
+  <meta name="author" content="강수근">
+  <title>디스크 케어 일지</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main>
+    <!-- 헤더 -->
+    <header>
+      <h1>💙 디스크 케어 일지</h1>
+      <p class="subtitle">매일 건강 상태를 기록하여 회복 과정을 추적하세요</p>
+      <p class="today" id="todayDisplay"></p>
+    </header>
+
+    <!-- 폼 시작 -->
+    <form id="healthForm">
+
+      <!-- 섹션 1: 기본 정보 -->
+      <section class="form-section">
+        <h2>📅 기본 정보</h2>
+        <div class="form-group">
+          <label for="recordDate">기록 날짜</label>
+          <input type="date" id="recordDate" name="recordDate" required>
+        </div>
+      </section>
+
+      <!-- 섹션 2: 통증 점수 -->
+      <section class="form-section">
+        <h2>🩺 통증 점수</h2>
+
+        <div class="form-group">
+          <label for="morningPain">🌅 기상 시 통증 (0 = 통증 없음, 10 = 최악)</label>
+          <div class="slider-container">
+            <input type="range" min="0" max="10" value="0" id="morningPain" name="morningPain" class="slider">
+            <span class="slider-value" id="morningPainValue">0</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="eveningPain">🌙 취침 전 통증 (0 = 통증 없음, 10 = 최악)</label>
+          <div class="slider-container">
+            <input type="range" min="0" max="10" value="0" id="eveningPain" name="eveningPain" class="slider">
+            <span class="slider-value" id="eveningPainValue">0</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 섹션 3: 통증 위치 -->
+      <section class="form-section">
+        <h2>📍 통증 위치</h2>
+        <p class="section-desc">해당되는 부위를 모두 선택하세요 (여러 개 가능)</p>
+        <div class="chip-group" id="painLocations">
+          <button type="button" class="chip" data-value="허리 중앙">허리 중앙</button>
+          <button type="button" class="chip" data-value="오른쪽 허리">오른쪽 허리</button>
+          <button type="button" class="chip" data-value="왼쪽 허리">왼쪽 허리</button>
+          <button type="button" class="chip" data-value="엉덩이">엉덩이</button>
+          <button type="button" class="chip" data-value="허벅지">허벅지</button>
+          <button type="button" class="chip" data-value="종아리">종아리</button>
+          <button type="button" class="chip" data-value="발">발</button>
+        </div>
+      </section>
+
+      <!-- 섹션 4: 통증 성격 -->
+      <section class="form-section">
+        <h2>🎯 통증 느낌</h2>
+        <p class="section-desc">통증의 성격을 모두 선택하세요 (여러 개 가능)</p>
+        <div class="chip-group" id="painTypes">
+          <button type="button" class="chip" data-value="묵직함">묵직함</button>
+          <button type="button" class="chip" data-value="찌릿함">찌릿함</button>
+          <button type="button" class="chip" data-value="당김">당김</button>
+          <button type="button" class="chip" data-value="타는 느낌">타는 느낌</button>
+          <button type="button" class="chip" data-value="저림">저림</button>
+        </div>
+      </section>
+
+      <!-- 섹션 5: 다리 증상 -->
+      <section class="form-section">
+        <h2>⚠️ 다리 증상</h2>
+        <p class="section-desc important">다리에 다음 증상이 있나요? (하나만 선택)</p>
+        <div class="radio-group" id="legSymptom">
+          <label class="radio-label">
+            <input type="radio" name="legSymptom" value="없음" checked>
+            <span>없음</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="legSymptom" value="저림">
+            <span>저림</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="legSymptom" value="당김">
+            <span>당김</span>
+          </label>
+          <label class="radio-label warning-option">
+            <input type="radio" name="legSymptom" value="힘 빠짐">
+            <span>⚠️ 힘 빠짐</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- 섹션 6: 활동 기록 -->
+      <section class="form-section">
+        <h2>📝 활동 기록</h2>
+
+        <div class="form-group">
+          <label for="activities">오늘 주요 활동</label>
+          <textarea
+            id="activities"
+            name="activities"
+            rows="3"
+            placeholder="예: 30분 걷기, 책상 작업 2시간, 가벼운 스트레칭"
+            maxlength="1000"></textarea>
+          <span class="char-count">0/1000</span>
+        </div>
+
+        <div class="form-group">
+          <label for="worsened">📈 통증이 심해진 순간</label>
+          <textarea
+            id="worsened"
+            name="worsened"
+            rows="3"
+            placeholder="예: 계단 내려갈 때, 30분 이상 앉아있을 때, 차 타고 이동 후"
+            maxlength="1000"></textarea>
+          <span class="char-count">0/1000</span>
+        </div>
+
+        <div class="form-group">
+          <label for="relieved">📉 통증이 나아진 방법</label>
+          <textarea
+            id="relieved"
+            name="relieved"
+            rows="3"
+            placeholder="예: 온찜질, 누워서 휴식, 가벼운 스트레칭"
+            maxlength="1000"></textarea>
+          <span class="char-count">0/1000</span>
+        </div>
+      </section>
+
+      <!-- 섹션 7: 약물 및 특이사항 -->
+      <section class="form-section">
+        <h2>💊 약물 및 특이사항</h2>
+
+        <div class="form-group">
+          <label for="medication">복용한 약/처치</label>
+          <textarea
+            id="medication"
+            name="medication"
+            rows="3"
+            placeholder="예: 타이레놀 2정 (오전 9시, 오후 3시), 근이완제 1정 (저녁)"
+            maxlength="1000"></textarea>
+          <span class="char-count">0/1000</span>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">🔔 오늘 특이사항</label>
+          <textarea
+            id="notes"
+            name="notes"
+            rows="3"
+            placeholder="예: 밤에 뒤척임 증가, 날씨가 추워서 통증 심해짐"
+            maxlength="1000"></textarea>
+          <span class="char-count">0/1000</span>
+        </div>
+
+        <div class="form-group">
+          <label for="summary">✏️ 하루 요약</label>
+          <textarea
+            id="summary"
+            name="summary"
+            rows="3"
+            placeholder="예: 전반적으로 어제보다 나음, 종아리 통증은 여전함"
+            maxlength="1000"></textarea>
+          <span class="char-count">0/1000</span>
+        </div>
+      </section>
+
+      <!-- 제출 버튼 -->
+      <div class="submit-section">
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span class="btn-text">기록 저장하기</span>
+          <span class="btn-loader" style="display: none;">저장 중...</span>
+        </button>
+      </div>
+
+    </form>
+
+    <!-- 경고 메시지 영역 -->
+    <div id="warningMessage" class="warning-message" style="display: none;"></div>
+
+    <!-- 성공 메시지 영역 -->
+    <div id="successMessage" class="success-message" style="display: none;"></div>
+
+    <!-- 푸터 -->
+    <footer>
+      <p>💙 아내의 빠른 회복을 기원합니다</p>
+      <p class="footer-note">기록된 데이터는 Google Sheets에 자동 저장됩니다</p>
+    </footer>
+  </main>
+
+  <!-- JavaScript -->
+  <script src="js/validation.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>
