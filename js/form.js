@@ -49,12 +49,16 @@ function displayToday() {
 
 /**
  * 날짜 입력 필드 기본값 설정 (오늘)
+ * 한국 시간 기준으로 날짜 계산
  */
 function setDefaultDate() {
   const dateInput = document.getElementById('recordDate');
   if (dateInput) {
+    // 한국 시간 기준으로 오늘 날짜 계산
     const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0];
+    const koreaOffset = 9 * 60; // 한국은 UTC+9
+    const koreaTime = new Date(today.getTime() + (koreaOffset + today.getTimezoneOffset()) * 60000);
+    const formattedDate = koreaTime.toISOString().split('T')[0];
     dateInput.value = formattedDate;
   }
 }
